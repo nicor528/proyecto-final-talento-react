@@ -1,6 +1,9 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 
+
+
 function MainBootstrap() {
+  const nombre = import.meta.env.VITE_NOMBRE_APP
   return (
     <Container className="my-4">
       <Row className="align-items-center">
@@ -13,7 +16,7 @@ function MainBootstrap() {
           />
         </Col>
         <Col xs={12} md={8} lg={8}>
-          <h2>Contenido Principal Actualizado</h2>
+          <h2>Contenido Principal Actualizado de {nombre}</h2>
           <p>
             Este es un ejemplo de contenido dentro del área principal.
           </p>
