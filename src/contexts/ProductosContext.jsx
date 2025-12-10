@@ -1,15 +1,26 @@
 import React, { createContext, useState, useContext } from 'react';
+import { useAuthContext } from './AuthContext';
 // Crear el contexto de de los productos
 const ProductosContext = createContext();
+
 export function ProductosProvider({ children }) {
     const [productos, setProductos] = useState([])
     const [productosOriginales, setProductosOriginales] = useState([])
     const [productoEncontrado, setProductoEncontrado] = useState([])
+    const [token, setToken] = useState("")
+
+    function verificacionLog(){
+        const adminToken = localStorage.getItem("adminToken")
+        if(adminToken){
+            setToken(adminToken)
+            console.log(token)
+        }
+    }
 
     function obtenerProductos() {
         return(
             new Promise((res, rej) => {
-                fetch('https://pfi-backnode.vercel.app/api/products')
+                fetch(`${import.meta.env.VITE_url_back}api/products`)
                     .then((respuesta) =>
                         respuesta.json()
                     )
@@ -29,13 +40,15 @@ export function ProductosProvider({ children }) {
     }
 
     const agregarProducto = (producto) => {
+        verificacionLog()
         return(
             new Promise(async (res, rej) => {
                 try {
-                    const respuesta = await fetch('https://68100d8b27f2fdac24101ef5.mockapi.io/productos', {
+                    const respuesta = await fetch(`${import.meta.env.VITE_url_back}api/products/create`, {
                         method: 'POST',
                         headers: {
                         'Content-Type': 'application/json',
+                        'authorization' : `Bearer ${token}`,
                         },
                         body: JSON.stringify(producto),
                     });
@@ -59,7 +72,7 @@ export function ProductosProvider({ children }) {
     function obtenerProducto(id){
         return(
             new Promise((res, rej) => {
-               fetch(`https://pfi-backnode.vercel.app/api/products/${id}`)
+               fetch(`${import.meta.env.VITE_url_back}api/products/${id}`)
                 .then((res) => res.json())
                 .then((datos) => {
                     if (datos) {
@@ -131,7 +144,7 @@ export function ProductosProvider({ children }) {
         }
 
         const productosFiltrados = productosOriginales.filter((producto) =>
-            producto.name.toLowerCase().includes(filtro.toLowerCase())
+            producto.nombre.toLowerCase().includes(filtro.toLowerCase())
         );
         setProductos(productosFiltrados)
     }

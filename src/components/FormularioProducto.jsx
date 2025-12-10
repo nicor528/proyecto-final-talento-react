@@ -10,20 +10,20 @@ function FormularioProducto({}) {
 
   const [producto, setProducto] = useState({
     name: '',
-    price: '',
-    description: '',
+    precio: '',
+    descripcion: '',
     imagen: ""
   });
 
   const validarFormulario = () => {
-    if (!producto.name.trim()) {
+    if (!producto.nombre.trim()) {
       return("El nombre es obligatorio.")
     }
-    if (!producto.price || producto.price <= 0) {
+    if (!producto.precio || producto.precio <= 0) {
       return("El precio debe ser mayor a 0.")
     }
-    console.log(producto.description.trim())
-    if (!producto.description.trim() || producto.description.length < 10) {
+    console.log(producto.descripcion.trim())
+    if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
       return("La descripción debe tener al menos 10 caracteres.")
     }
     if(!producto.imagen.trim()){
@@ -44,7 +44,7 @@ function FormularioProducto({}) {
     const validarForm = validarFormulario()
     if (validarForm == true) {
       agregarProducto(producto).then((data) => {
-        setProducto({ name: '', price: '', description: '', imagen: ""});
+        setProducto({ name: '', precio: '', descripcion: '', imagen: ""});
       }).catch((error) => {
         dispararSweetBasico("Hubo un problema al agregar el producto", error, "error", "Cerrar")
       })
@@ -68,8 +68,8 @@ function FormularioProducto({}) {
           <input
             className="form-control"
             type="text"
-            name="name"
-            value={producto.name || ''}
+            name="nombre"
+            value={producto.nombre || ''}
             onChange={handleChange}
             required
           />
@@ -83,8 +83,8 @@ function FormularioProducto({}) {
           <label className="form-label">Precio:</label>
           <input
             type="number"
-            name="price"
-            value={producto.price || ''}
+            name="precio"
+            value={producto.precio || ''}
             onChange={handleChange}
             required
             className="form-control"
@@ -94,8 +94,8 @@ function FormularioProducto({}) {
         <div>
           <label className="form-label">Descripcion:</label>
           <textarea
-            name="description"
-            value={producto.description || ''}
+            name="descripcion"
+            value={producto.descripcion || ''}
             onChange={handleChange}
             required
             className="form-control"

@@ -11,7 +11,7 @@ export default function Carrito() {
     console.log("Productos: " + productosCarrito)
 
     const total = productosCarrito.reduce(
-        (subTotal, producto) => subTotal + producto.price * producto.cantidad, 0
+        (subTotal, producto) => subTotal + producto.precio * producto.cantidad, 0
     )
 
     function funcionDisparadora(id){

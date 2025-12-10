@@ -67,11 +67,11 @@ function ProductoDetalle({}) {
 
   return (
     <div className="detalle-container">
-      <img className="detalle-imagen" src={productoEncontrado.imagen} alt={productoEncontrado.name} />
+      <img className="detalle-imagen" src={productoEncontrado.imagen} alt={productoEncontradonombre} />
       <div className="detalle-info">
-        <h2>{productoEncontrado.name}</h2>
-        <p>{productoEncontrado.description}</p>
-        <p>{productoEncontrado.price} $</p>
+        <h2>{productoEncontradonombre}</h2>
+        <p>{productoEncontrado.descripcion}</p>
+        <p>{productoEncontradoprecio} $</p>
         <div className="detalle-contador">
           <button onClick={restarContador}>-</button>
           <span>{cantidad}</span>

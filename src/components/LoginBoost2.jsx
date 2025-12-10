@@ -14,7 +14,7 @@ function LoginBoost2() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Simulación de autenticación
-    if (usuario === 'admin' && password === '1234') {
+    if (usuario === 'admin@gmail.com' && password === '123456') {
       login(usuario);
       navigate('/');
     } else {
@@ -44,7 +44,7 @@ function LoginBoost2() {
   function iniciarSesionEmailPass (e) {
     e.preventDefault();
     loginEmailPass(usuario, password).then((user) => {
-      login(usuario)
+      login(usuario, user.token)
       dispararSweetBasico("Logeo exitoso", "", "success", "Confirmar")
     }).catch((error) => {
       if(error.code == "auth/invalid-credential"){

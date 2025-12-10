@@ -11,7 +11,7 @@ function CarritoBootstrap() {
     const { productosCarrito, vaciarCarrito, borrarProductoCarrito } = useContext(CarritoContext);
 
     const total = productosCarrito.reduce(
-        (subTotal, producto) => subTotal + producto.price * producto.cantidad,
+        (subTotal, producto) => subTotal + producto.precio * producto.cantidad,
         0
     );
 

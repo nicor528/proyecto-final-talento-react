@@ -73,11 +73,29 @@ export function loginEmailPass(email, password){
         new Promise((res, rej) => {
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
+                // Signed in
                 console.log("Credenciales", userCredential)
                 const user = userCredential.user;
-                console.log(user)
-                res(user)
+                const user_back = {email: email, password : "123456"}
+                fetch(`${import.meta.env.VITE_url_back}api/login`,{
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user_back),
+                }).then(async (response) => {
+                    if (!response.ok){
+                         throw new Error('Error al iniciar sesión.');
+                    }
+                    const data = await response.json()
+                    console.log(data)
+                    console.log(user)
+                    user.token = data.token
+                    res(user)
+                }).catch(error => {
+                    console.log(error)
+                    rej(error)
+                })
             })
             .catch((error) => {
                 console.log(error.code)
@@ -126,10 +144,10 @@ export function obtenerProductos() {
                         const data = doc.data();
                         return {
                             id: doc.id,
-                            name: data.name,
+                            name: data.nombre,
                             imagen: data.imagen,
-                            price: data.price,
-                            description: data.description
+                            price: data.precio,
+                            description: data.descripcion
                         };
                     });
 

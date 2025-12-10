@@ -17,17 +17,17 @@ function CarritoCardBootstrap({ producto, funcionDisparadora }) {
                 />
             </Col>
             <Col md={2}>
-                <Card.Title>{producto.name}</Card.Title>
-                <Card.Text className="text-muted">{producto.description}</Card.Text>
+                <Card.Title>{productonombre}</Card.Title>
+                <Card.Text className="text-muted">{producto.descripcion}</Card.Text>
             </Col>
             <Col md={1}>
                 <span>Cant: {producto.cantidad}</span>
             </Col>
             <Col md={2}>
-                <span>Precio: {producto.price} $</span>
+                <span>Precio: {producto.precio} $</span>
             </Col>
             <Col md={2}>
-                <span>Subtotal: {producto.cantidad * producto.price} $</span>
+                <span>Subtotal: {producto.cantidad * producto.precio} $</span>
             </Col>
             <Col md={2}>
                 <Button variant="danger" onClick={borrarDelCarrito}>

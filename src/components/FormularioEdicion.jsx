@@ -39,14 +39,14 @@ function FormularioEdicion({ }) {
   };
 
   const validarFormulario = () => {
-    if (!producto.name.trim()) {
+    if (!productonombre.trim()) {
       return("El nombre es obligatorio.")
     }
-    if (!producto.price || producto.price <= 0) {
+    if (!producto.precio || producto.precio <= 0) {
       return("El precio debe ser mayor a 0.")
     }
-    console.log(producto.description.trim())
-    if (!producto.description.trim() || producto.description.length < 10) {
+    console.log(producto.descripcion.trim())
+    if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
       return("La descripción debe tener al menos 10 caracteres.")
     }
     if(!producto.imagen.trim()){
@@ -82,7 +82,7 @@ function FormularioEdicion({ }) {
             className="form-control"
             type="text"
             name="name"
-            value={producto.name || ''}
+            value={productonombre || ''}
             onChange={handleChange}
             required
           />
@@ -97,7 +97,7 @@ function FormularioEdicion({ }) {
           <input
             type="number"
             name="price"
-            value={producto.price || ''}
+            value={producto.precio || ''}
             onChange={handleChange}
             required
             className="form-control"
@@ -108,7 +108,7 @@ function FormularioEdicion({ }) {
           <label className="form-label">Descripcion:</label>
           <textarea
             name="description"
-            value={producto.description || ''}
+            value={producto.descripcion || ''}
             onChange={handleChange}
             required
             className="form-control"
