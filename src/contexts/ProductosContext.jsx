@@ -9,7 +9,7 @@ export function ProductosProvider({ children }) {
     function obtenerProductos() {
         return(
             new Promise((res, rej) => {
-                fetch('https://68100d8b27f2fdac24101ef5.mockapi.io/productos')
+                fetch('https://pfi-backnode.vercel.app/api/products')
                     .then((respuesta) =>
                         respuesta.json()
                     )
@@ -59,12 +59,12 @@ export function ProductosProvider({ children }) {
     function obtenerProducto(id){
         return(
             new Promise((res, rej) => {
-               fetch("https://68100d8b27f2fdac24101ef5.mockapi.io/productos")
+               fetch(`https://pfi-backnode.vercel.app/api/products/${id}`)
                 .then((res) => res.json())
                 .then((datos) => {
-                    const productoEncontrado = datos.find((item) => item.id === id);
-                    if (productoEncontrado) {
-                    setProductoEncontrado(productoEncontrado);
+                    if (datos) {
+                    setProductoEncontrado(datos);
+                    console.log("datos desde el back: ",datos)
                     res(datos)
                     } else {
                         rej("Producto no encontrado")

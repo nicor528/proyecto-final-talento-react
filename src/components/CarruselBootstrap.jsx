@@ -28,12 +28,12 @@ function CarruselBootstrap() {
                     <img
                     className="d-block w-100"
                     src={producto.imagen}
-                    alt={producto.name}
+                    alt={producto.nombre}
                     style={{ height: "400px", objectFit: "cover" }}
                     />
                     <Carousel.Caption>
-                    <h3>{producto.name}</h3>
-                    <p>{producto.description}</p>
+                    <h3>{producto.nombre}</h3>
+                    <p>{producto.descripcion}</p>
                     </Carousel.Caption>
                 </Carousel.Item>
                 ))}
