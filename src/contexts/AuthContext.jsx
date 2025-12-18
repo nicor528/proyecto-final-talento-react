@@ -5,12 +5,13 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [admin, setAdmin] = useState(false);
 
-  const login = (username, token) => {
+  const login = (username, token, refreshToken) => {
     // Simulando la creación de un token (en una app real, esto sería generado por un servidor)
     //const token = `fake-token-${token}`;
     if(username == "admin@gmail.com"){ //contraseña : test12
       setAdmin(true)
       localStorage.setItem('adminToken', token);
+      localStorage.setItem('adminRefresh', refreshToken);
     }
     localStorage.setItem('authToken', token);
     setUser(username);

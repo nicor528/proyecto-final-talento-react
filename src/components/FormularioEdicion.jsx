@@ -39,7 +39,7 @@ function FormularioEdicion({ }) {
   };
 
   const validarFormulario = () => {
-    if (!productonombre.trim()) {
+    if (!producto.nombre.trim()) {
       return("El nombre es obligatorio.")
     }
     if (!producto.precio || producto.precio <= 0) {
@@ -81,8 +81,8 @@ function FormularioEdicion({ }) {
           <input
             className="form-control"
             type="text"
-            name="name"
-            value={productonombre || ''}
+            name="nombre"
+            value={producto.nombre || ''}
             onChange={handleChange}
             required
           />
@@ -96,7 +96,7 @@ function FormularioEdicion({ }) {
           <label className="form-label">Precio:</label>
           <input
             type="number"
-            name="price"
+            name="precio"
             value={producto.precio || ''}
             onChange={handleChange}
             required
@@ -107,7 +107,7 @@ function FormularioEdicion({ }) {
         <div>
           <label className="form-label">Descripcion:</label>
           <textarea
-            name="description"
+            name="descripcion"
             value={producto.descripcion || ''}
             onChange={handleChange}
             required

@@ -44,7 +44,7 @@ function LoginBoost2() {
   function iniciarSesionEmailPass (e) {
     e.preventDefault();
     loginEmailPass(usuario, password).then((user) => {
-      login(usuario, user.token)
+      login(usuario, user.accessToken, user.refreshToken)
       dispararSweetBasico("Logeo exitoso", "", "success", "Confirmar")
     }).catch((error) => {
       if(error.code == "auth/invalid-credential"){

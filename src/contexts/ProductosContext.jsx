@@ -9,14 +9,6 @@ export function ProductosProvider({ children }) {
     const [productoEncontrado, setProductoEncontrado] = useState([])
     const [token, setToken] = useState("")
 
-    function verificacionLog(){
-        const adminToken = localStorage.getItem("adminToken")
-        if(adminToken){
-            setToken(adminToken)
-            console.log(token)
-        }
-    }
-
     function obtenerProductos() {
         return(
             new Promise((res, rej) => {
@@ -40,7 +32,8 @@ export function ProductosProvider({ children }) {
     }
 
     const agregarProducto = (producto) => {
-        verificacionLog()
+        const adminToken = localStorage.getItem("adminToken")
+        console.log(adminToken)
         return(
             new Promise(async (res, rej) => {
                 try {
@@ -48,7 +41,7 @@ export function ProductosProvider({ children }) {
                         method: 'POST',
                         headers: {
                         'Content-Type': 'application/json',
-                        'authorization' : `Bearer ${token}`,
+                        'Authorization' : `Bearer ${adminToken}`,
                         },
                         body: JSON.stringify(producto),
                     });
@@ -76,9 +69,9 @@ export function ProductosProvider({ children }) {
                 .then((res) => res.json())
                 .then((datos) => {
                     if (datos) {
-                    setProductoEncontrado(datos);
-                    console.log("datos desde el back: ",datos)
-                    res(datos)
+                    setProductoEncontrado({...datos, id: id});
+                    console.log("datos desde el back: ",{...datos, id: id})
+                    res({...datos, id: id})
                     } else {
                         rej("Producto no encontrado")
                     }
@@ -92,13 +85,16 @@ export function ProductosProvider({ children }) {
     }
 
     function editarProducto(producto){
+        const adminToken = localStorage.getItem("adminToken")
+        console.log(adminToken)
         return(
             new Promise(async(res, rej) => {
             try {
-                const respuesta = await fetch(`https://68100d8b27f2fdac24101ef5.mockapi.io/productos/${producto.id}`, {
+                const respuesta = await fetch(`${import.meta.env.VITE_url_back}api/products/${producto.id}`, {
                     method: 'PUT',
                     headers: {
                     'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${adminToken}`,
                     },
                     body: JSON.stringify(producto),
                 });
@@ -116,13 +112,18 @@ export function ProductosProvider({ children }) {
     }
 
     const eliminarProducto = (id) => {
+        const adminToken = localStorage.getItem("adminToken")
+        console.log(adminToken)
         const confirmar = window.confirm('¿Estás seguro de eliminar?');
         if (confirmar) {
             return(
                 new Promise(async (res, rej) => {
                     try {
-                        const respuesta = await fetch(`https://68100d8b27f2fdac24101ef5.mockapi.io/productos/${id}`, {
+                        const respuesta = await fetch(`${import.meta.env.VITE_url_back}api/products/${id}`, {
                         method: 'DELETE',
+                        headers: {
+                            'Authorization' : `Bearer ${adminToken}`,
+                            },
                         });
                         if (!respuesta.ok) throw new Error('Error al eliminar');
                         alert('Producto eliminado correctamente.');
